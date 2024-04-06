@@ -1,2 +1,0 @@
-# VLONE-sTeamPr
-first projeck
