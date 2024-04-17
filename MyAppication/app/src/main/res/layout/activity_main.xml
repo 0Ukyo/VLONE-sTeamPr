@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
+    android:background="@drawable/car1"
     >
 
     <LinearLayout
@@ -18,13 +19,25 @@
             android:layout_height="508dp"
             android:orientation="vertical">
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="63dp">
+
+            </View>
+<ImageView
+
+    android:src="@drawable/baseline_account_circle_24"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"></ImageView>
             <EditText
+
                 android:id="@+id/editTextTextMultiLine2"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:drawableLeft="@drawable/count"
                 android:hint="Count"
-                android:drawablePadding="15dp"
+                android:textSize="50dp"
+                android:drawablePadding="20dp"
                 android:inputType="text" />
 
             <EditText
@@ -32,7 +45,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:hint="passWorld"
-                android:drawablePadding="15dp"
+                android:textSize="50dp"
+                android:drawablePadding="20dp"
                 android:drawableLeft="@drawable/baseline_emoji_flags_24"
                 android:inputType="numberPassword" />
         </LinearLayout>
@@ -44,15 +58,20 @@
 
             <Button
                 android:id="@+id/button8"
+                android:background="@android:color/transparent"
+                android:textSize="50dp"
+                android:textColor="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="98dp"
-                android:text="regin" />
+                android:text="注册" />
 
             <Button
                 android:id="@+id/button9"
+                android:background="@android:color/transparent"
+                android:textSize="50dp"
                 android:layout_width="match_parent"
                 android:layout_height="105dp"
-                android:text="login" />
+                android:text="登录" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

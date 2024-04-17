@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 import androidx.core.app.OnNewIntentProvider;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -20,9 +21,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.os.Build;
+import android.os.Bundle;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
     private DBHelper dbHelper;
+
+    private NotificationManager manager;
+    private Notification note,note2;
     private Button regin,login;
     private EditText Count1 ,passW;
     @Override
@@ -36,7 +50,44 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
- regin=findViewById(R.id.button8);
+        Toast.makeText(this, "Welcome For Shopping", Toast.LENGTH_SHORT).show();
+//manager
+        manager=(NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
+            NotificationChannel channel=new NotificationChannel("1","电商系统",
+                    NotificationManager.IMPORTANCE_HIGH);
+            manager.createNotificationChannel(channel);
+        }
+//点击View
+       /* Intent intent=new Intent(this,MainActivity.class);
+        PendingIntent pending=PendingIntent.getActivity(this,0,intent,0);*/
+
+        note=new NotificationCompat.Builder(this,"1")
+                .setContentTitle("电商系统用户注册成功")
+                .setContentText("Welcome bro")
+                .setSmallIcon(R.drawable.baseline_emoji_flags_24)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.drawable.count))
+                .setColor(Color.parseColor("#ff0000"))//设置小图标颜色
+                //.setContentIntent(pending)//设置点击动作
+                .setAutoCancel(true)
+                .build();
+
+
+
+        note2 =new NotificationCompat.Builder(this,"1")
+                .setContentTitle("电商系统用户登录成功")
+                .setContentText("Welcome bro")
+                .setSmallIcon(R.drawable.baseline_emoji_flags_24)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.drawable.count))
+                .setColor(Color.parseColor("#ff0000"))//设置小图标颜色
+                //.setContentIntent(pending)//设置点击动作
+                .setAutoCancel(true)
+                .build();
+
+
+
+        regin=findViewById(R.id.button8);
   login=findViewById(R.id.button9);
   Count1=findViewById(R.id.editTextTextMultiLine2);
  passW=findViewById(R.id.editTextTextPassword4);
@@ -55,19 +106,22 @@ SQLiteDatabase db=helper.getReadableDatabase();
         String count1=Count1.getText().toString();
         String passworld=passW.getText().toString();
 
+if (!count1.isEmpty())
+{
+    if (db.isOpen())
+    {
 
-        if(db.isOpen())
-        {
-            String sql="insert into persons  values(null,?,?)";
-            db.execSQL(sql,new String[]{count1,passworld});
-            Log.e(TAG,"SUCCESS");
-        }
+        String sql = "insert into persons  values(null,?,?)";
+        db.execSQL(sql, new String[]{count1, passworld});
+        Log.e(TAG, "SUCCESS");
+        manager.notify(1, note);
+    }
 
 
-db.close();
+    db.close();
 
 
-
+}
 
 
 
@@ -91,10 +145,14 @@ login.setOnClickListener(new View.OnClickListener() {
                 String name = cursor.getString(cursor.getColumnIndex("name"));
                 String passw = cursor.getString((cursor.getColumnIndex("passWorld")));
 
-                if (count1.equals(name) && (passworld.equals(passw))) {
+                if (count1.equals(name) && (passworld.equals(passw))&&(!count1.isEmpty())) {
                     rightWorld = false;
                     Log.e(TAG,"登录成功");
-                    showSuccessToast("yahu");
+                    manager.notify(1,note2);
+                    Intent intent=new Intent( );
+                    intent.setClass(MainActivity.this, MainActivity2.class);
+                    startActivity(intent);
+                  //  showSuccessToast("yahu");
                 }
 
 
@@ -103,7 +161,7 @@ login.setOnClickListener(new View.OnClickListener() {
             if (rightWorld)
             {
 
-                showErrorToast("妈卖批");
+                showErrorToast("Goddamn!Do Again");
 
             }
             cursor.close();
