@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_gravity="clip_vertical"
+    android:background="@drawable/wall1"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/ImageShop"
+            android:layout_width="237dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:scaleType="fitXY">
+
+        </ImageView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <TextView
+                android:gravity="center"
+                android:background="@color/black"
+                android:textSize="20dp"
+                android:text="商品："
+                android:textColor="@color/white"
+                android:id="@+id/textIntroduce"
+                android:layout_width="match_parent"
+                android:layout_height="82dp"></TextView>
+            <TextView
+                android:id="@+id/Textprice"
+                android:textColor="@color/white"
+                android:text="价格："
+                android:background="@color/black"
+                android:gravity="center"
+                android:textSize="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+            </TextView>
+
+            <Button
+                android:id="@+id/Buttonnext"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:backgroundTint="@color/black"
+                android:text="刷新"
+                android:textColor="@color/white"
+                android:textSize="50dp">
+
+            </Button>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btChose"
+        android:textSize="20dp"
+        android:background="@android:color/transparent"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="10dp"
+        android:text="新增商品"></Button>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/baseline_add_shopping_card">
+    </androidx.recyclerview.widget.RecyclerView>
+
+</LinearLayout>
